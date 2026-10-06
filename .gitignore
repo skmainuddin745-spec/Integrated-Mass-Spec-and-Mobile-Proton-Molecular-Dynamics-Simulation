@@ -1,0 +1,24 @@
+# GROMACS large binary outputs
+*.xtc
+*.trr
+*.edr
+*.tpr
+*.cpt
+*.bak
+*.bak-*
+mdout.mdp
+state.cpt
+
+# Large trajectory/structure archives
+*.rar
+*.zip
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db

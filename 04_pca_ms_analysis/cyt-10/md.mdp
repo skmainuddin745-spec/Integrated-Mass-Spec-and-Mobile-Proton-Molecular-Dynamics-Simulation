@@ -1,0 +1,68 @@
+title		= Production Run maintained from 298 to 350 K
+
+; Run Parameters
+integrator	= md		
+nsteps		= 20000000	; 10 ns
+dt          = 0.0005     ; 2 fs
+nstxout     = 0         ; No output, except for last frame (coordinates)
+nstvout     = 0         ; No output, except for last frame (velocities)
+nstfout     = 0         ; No output, except for last frame (forces)
+nstxtcout   = 200000      ; Write compressed trajectory every 2 ps (coordinates)
+nstenergy	= 1000		; Write energies to disk every 2 ps
+energygrps	= System
+
+; Parameters describing how to find the neighbors of each atom and how to calculate the interactions
+cutoff-scheme   = verlet
+nstlist         = 100             ; Frequency to update the neighbor list
+ns_type		= grid  	; Method to determine neighbor list (simple, grid)
+periodic-molecules  = no
+vdwtype     = cut-off
+coulombtype	= cut-off ; Treatment of long range electrostatic interactions
+epsilon_r      = 1
+rcoulomb	= 300		; long range electrostatic cut-off
+rvdw		= 300		; long range Van der Waals cut-off
+pbc		= xyz		
+
+continuation            = yes
+constraint_algorithm    = lincs
+constraints	            = h-bonds 
+lincs_iter              = 1
+lincs_order             = 4
+lincs-warnangle = 90 
+
+; Temperature Coupling
+tcoupl      = Nose-Hoover
+tc-grps     = System
+tau_t       = 0.1
+ref_t       = 590.5
+annealing   = single
+annealing-npoints = 2
+annealing-time = 0 10000
+annealing-temp = 590.5 623    ; Temperature will rise linearly from 298 to 350 K
+pcoupl      = no
+gen_vel     = no
+; Pull code
+pull = yes
+pull-ngroups = 3
+pull-ncoords = 2
+pull-group1-name = System_&_a_282
+pull-group2-name = System_&_a_1652
+pull-group3-name = System_&_a_1242
+pull-coord1-type = umbrella
+pull-coord2-type = umbrella
+pull-coord1-geometry = distance ; simple distance increase
+pull-coord2-geometry = distance ; simple distance increase
+pull-coord1-groups = 1 2
+pull-coord2-groups = 3 2
+pull-coord1-dim = Y Y Y
+pull-coord2-dim = Y Y Y
+pull-coord1-rate = 0.0 ; not pull, just distance restraint at a reference distance bw 2 groups
+pull-coord2-rate = 0.0 ; not pull, just distance restraint at a reference distance bw 2 groups
+pull-coord1-k = 5000 ; kJ mol^-1 nm^-2
+pull-coord2-k = 5000 ; kJ mol^-1 nm^-2
+pull-coord1-init = 0.220
+pull-coord2-init = 0.334
+pull-nstxout = 0
+pull-nstfout = 0
+
+
