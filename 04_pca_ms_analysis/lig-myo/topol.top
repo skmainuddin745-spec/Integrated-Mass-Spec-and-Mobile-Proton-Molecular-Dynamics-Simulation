@@ -11,9 +11,9 @@
 ;	
 ;	Executable:   /usr/local/gromacs/bin/gmx
 ;	Data prefix:  /usr/local/gromacs
-;	Working dir:  /home/rgrc-ctg/Music/jaish/24-project/myo/9+-charge-state/6
+;	Working dir:  /opt/hpc/md_production/system_run
 ;	Command line:
-;	  gmx pdb2gmx -f protein.pdb -o jaish_processed.gro -inter -chainsep interactive -ignh
+;	  gmx pdb2gmx -f protein.pdb -o system_processed.gro -inter -chainsep interactive -ignh
 ;	Force field was read from current directory or a relative path - path added.
 ;
 
